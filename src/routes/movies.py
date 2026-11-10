@@ -9,6 +9,7 @@ from sqlalchemy import func
 
 router = APIRouter()
 
+
 @router.get("/movies/", response_model=schemas.movies.MovieListResponseSchema)
 async def get_all_movies(
         db: AsyncSession = Depends(get_db),
@@ -44,6 +45,7 @@ async def get_all_movies(
         "total_pages": total_pages,
         "total_items": total_items
     }
+
 
 @router.get("/movies/{movie_id}/", response_model=schemas.movies.MovieDetailResponseSchema)
 async def get_movie_by_id(
