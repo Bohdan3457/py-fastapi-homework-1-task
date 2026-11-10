@@ -19,7 +19,8 @@ async def get_all_movies(
     if total_items <= 0:
         raise HTTPException(status_code=404, detail="No movies found.")
     result = await db.scalars(
-        select(database.models.MovieModel).offset((page - 1) * per_page).limit(per_page)
+        select(database.models.MovieModel).offset(
+            (page - 1) * per_page).limit(per_page)
     )
     total_pages = (total_items + per_page - 1) // per_page
 
@@ -34,7 +35,7 @@ async def get_all_movies(
     if total_pages <= page:
         next_page = None
     else:
-        next_page =f"/theater/movies/?page={page + 1}&per_page={per_page}"
+        next_page = f"/theater/movies/?page={page + 1}&per_page={per_page}"
 
     return {
         "movies": movies,
